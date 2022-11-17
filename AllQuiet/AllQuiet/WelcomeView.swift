@@ -2,9 +2,16 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.white, .black]), startPoint: .top, endPoint: .center)
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            VStack {
+                Text("Welcome to").font(.subTitle).bold()
+                Text("All Quiet").font(.titleLarge).bold()
+                Text("Incident escalation done right").font(.regular)
+            }.padding(.top)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .foregroundColor(.white)
+        .background(LinearGradient(gradient: Gradient(colors: [.Background, .Purple200]), startPoint: .top, endPoint: .bottom))
     }
 }
 
