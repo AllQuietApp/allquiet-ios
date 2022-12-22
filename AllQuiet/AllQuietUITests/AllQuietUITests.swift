@@ -1,10 +1,3 @@
-//
-//  AllQuietUITests.swift
-//  AllQuietUITests
-//
-//  Created by MB on 16.11.22.
-//
-
 import XCTest
 
 class AllQuietUITests: XCTestCase {

@@ -1,10 +1,3 @@
-//
-//  AllQuietTests.swift
-//  AllQuietTests
-//
-//  Created by MB on 16.11.22.
-//
-
 import XCTest
 @testable import AllQuiet
 

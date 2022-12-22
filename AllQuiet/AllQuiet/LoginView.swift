@@ -4,14 +4,17 @@ struct LoginView: View {
     
     @State private var email: String = ""
     @FocusState private var emailFieldIsFocused: Bool
+    @State private var emailFieldHasError: Bool = false
     
     @State private var password: String = ""
     @FocusState private var passwordFieldIsFocused: Bool
+    @State private var passwordFieldHasError: Bool = false
+    
+    var isValid: Bool {
+        return !emailFieldHasError && !passwordFieldHasError
+    }
     
     var body: some View {
-
-
-        
         VStack {
             Spacer().frame(height: 32)
             VStack {
@@ -23,27 +26,27 @@ struct LoginView: View {
                     "Email",
                     text: $email
                 )
-                .focused($emailFieldIsFocused)
-                .onSubmit {
-                    validate(email: email, password: password)
+                .onChange(of: email) { newEmail in
+                    validate(email: newEmail, password: password)
                 }
+                .focused($emailFieldIsFocused)
                 .padding()
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
-                .border(.secondary)
+                .border(emailFieldHasError ? Color.Error : .secondary)
                 
                 TextField(
                     "Password",
                     text: $password
                 )
-                .focused($passwordFieldIsFocused)
-                .onSubmit {
-                    validate(email: email, password: password)
+                .onChange(of: password) { newPassword in
+                    validate(email: email, password: newPassword)
                 }
+                .focused($passwordFieldIsFocused)
                 .padding()
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
-                .border(.secondary)
+                .border(passwordFieldHasError ? Color.Error : .secondary)
                 
                 Button(action: onLogin) {
                     Text("Login")
@@ -52,6 +55,8 @@ struct LoginView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                 }.background(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                    .disabled(!isValid)
+                    .opacity(isValid ? 1.0 : 0.5)
                 Spacer().frame(height: 24)
                 Text("[Not signed up yet? Sign up now!](https://allquiet.app/signup?utm_source=app)").accentColor(.white).font(.regular)
             }
@@ -64,11 +69,12 @@ struct LoginView: View {
     }
     
     func validate(email: String?, password: String?) {
-        
+        emailFieldHasError = email?.isEmpty != false
+        passwordFieldHasError = password?.isEmpty != false
     }
     
     func onLogin() {
-        
+        validate(email: email, password: password)
     }
 }
 
