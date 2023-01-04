@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    
+    let authenticationClient = AuthenticationClient()
     @State private var email: String = ""
     @FocusState private var emailFieldIsFocused: Bool
     @State private var emailFieldHasError: Bool = false
@@ -68,13 +68,23 @@ struct LoginView: View {
         .background(LinearGradient(gradient: Gradient(colors: [.Background, .Purple400]), startPoint: .top, endPoint: .bottom))
     }
     
-    func validate(email: String?, password: String?) {
+    func validate(email: String?, password: String?) -> Bool {
         emailFieldHasError = email?.isEmpty != false
         passwordFieldHasError = password?.isEmpty != false
+        return !emailFieldHasError && !passwordFieldHasError
     }
     
     func onLogin() {
-        validate(email: email, password: password)
+        let validationResult = validate(email: email, password: password)
+        if (validationResult) {
+            Task {
+                do {
+                    let result = try await authenticationClient.login(request: AccessTokenRequest(userName: email, password: password))
+                } catch {
+                    
+                }
+            }
+        }
     }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C18307E295431B900B859DA /* AuthenticationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18307D295431B900B859DA /* AuthenticationClient.swift */; };
+		2C23119E29655C90006919B9 /* BasicAuthExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23119D29655C90006919B9 /* BasicAuthExtension.swift */; };
+		2C470C97295ED81100509B3B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470C96295ED81100509B3B /* Config.swift */; };
 		2CBC1CB6292CA28E006AB93E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC1CB5292CA28E006AB93E /* LoginView.swift */; };
 		2CF08DE1292605F2009E85FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08DE0292605F2009E85FC /* Color.swift */; };
 		2CF08E0729261026009E85FC /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08DFB29260ECF009E85FC /* Roboto-Black.ttf */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		2C18307D295431B900B859DA /* AuthenticationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationClient.swift; sourceTree = "<group>"; };
+		2C23119D29655C90006919B9 /* BasicAuthExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthExtension.swift; sourceTree = "<group>"; };
+		2C470C96295ED81100509B3B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		2CBC1CB5292CA28E006AB93E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2CF08DE0292605F2009E85FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2CF08DFB29260ECF009E85FC /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2C18307C2954319D00B859DA /* Authentication */,
+				2C23119D29655C90006919B9 /* BasicAuthExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 				2CFBF3FD2924B58D009C99A6 /* Assets.xcassets */,
 				2CFBF3FF2924B58D009C99A6 /* Preview Content */,
 				2CF08DE0292605F2009E85FC /* Color.swift */,
+				2C470C96295ED81100509B3B /* Config.swift */,
 			);
 			path = AllQuiet;
 			sourceTree = "<group>";
@@ -328,6 +334,8 @@
 				2CFBF3FC2924B58A009C99A6 /* WelcomeView.swift in Sources */,
 				2CFBF3FA2924B58A009C99A6 /* AllQuietApp.swift in Sources */,
 				2CF08E0B2926111E009E85FC /* FontExtensions.swift in Sources */,
+				2C470C97295ED81100509B3B /* Config.swift in Sources */,
+				2C23119E29655C90006919B9 /* BasicAuthExtension.swift in Sources */,
 				2CBC1CB6292CA28E006AB93E /* LoginView.swift in Sources */,
 				2C18307E295431B900B859DA /* AuthenticationClient.swift in Sources */,
 				2CF08DE1292605F2009E85FC /* Color.swift in Sources */,

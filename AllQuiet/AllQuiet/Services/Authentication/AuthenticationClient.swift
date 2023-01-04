@@ -1,31 +1,38 @@
 import Foundation
-
-struct AccessTokenRequest: Identifiable, Codable{
+ 
+struct AccessTokenRequest: Codable {
     var userName: String
     var password: String
 }
 
-struct AccessTokenResponse: Identifiable, Codable{
-    var userName: String
-    var password: String
+struct AccessTokenResponse: Codable {
+    var accessToken: JwtToken?
+    var refreshToken: JwtToken?
+}
+
+struct JwtToken: Codable {
+    var token: String
+    var expiresAt: Date
 }
 
 class AuthenticationClient {
-    func login(request: AccessTokenRequest): AccessTokenResponse async {
+    var config = Config()
+    func login(request: AccessTokenRequest) async -> AccessTokenResponse? {
+        let url = config.environment.baseURL + "/accesstoken"
+        var request = URLRequest(url: URL(string: url)!)
+        if (config.environment.basicAuth != nil) {
+            request.setBasicAuth(username: config.environment.basicAuth!.userName, password: config.environment.basicAuth!.password)
+        }
+        request.httpMethod = "POST"
         
-        // Learn to read dynamic value here:
-        // https://cocoacasts.com/switching-environments-with-configurations
-        
-        let url = URL(string: baseUrl + "/accesstoken")!
-        let urlSession = URLSession.shared
-
         do {
-            let (data, response) = try await urlSession.data(from: url)
-            return try JSONDecoder().decode([AccessTokenResponse].self, from: data)
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let result = try JSONDecoder().decode(AccessTokenResponse.self, from: data)
+            return result
         }
         catch {
             debugPrint("Error loading \(url): \(String(describing: error))")
+            return nil;
         }
-
     }
 }
