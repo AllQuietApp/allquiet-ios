@@ -2,13 +2,15 @@ import SwiftUI
 
 struct LoginView: View {
     let authenticationClient = AuthenticationClient()
-    @State private var email: String = ""
+    @State private var email: String = "mads@allquiet.app"
     @FocusState private var emailFieldIsFocused: Bool
     @State private var emailFieldHasError: Bool = false
     
-    @State private var password: String = ""
+    @State private var password: String = "abcd1234"
     @FocusState private var passwordFieldIsFocused: Bool
     @State private var passwordFieldHasError: Bool = false
+    
+    @State private var errors = [ResultError]()
     
     var isValid: Bool {
         return !emailFieldHasError && !passwordFieldHasError
@@ -47,6 +49,17 @@ struct LoginView: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .border(passwordFieldHasError ? Color.Error : .secondary)
+                if (!errors.isEmpty) {
+                    
+                    VStack {
+                        Spacer().frame(height: 8)
+                        ForEach(errors, id: \.self.description) { error in
+                            Text(error.description).foregroundColor(Color.Error).font(.regular)
+                        }
+                        Spacer().frame(height: 8)
+                    }
+                        
+                }
                 
                 Button(action: onLogin) {
                     Text("Login")
@@ -77,11 +90,19 @@ struct LoginView: View {
     func onLogin() {
         let validationResult = validate(email: email, password: password)
         if (validationResult) {
+            errors = []
             Task {
                 do {
-                    let result = try await authenticationClient.login(request: AccessTokenRequest(userName: email, password: password))
-                } catch {
+                    guard let result = try await authenticationClient.login(request: AccessTokenRequest(userName: email, password: password)) else {
+                        return
+                    }
                     
+                    if (result.succeeded == false) {
+                        errors = result.errors
+                    }
+                    
+                } catch {
+                    errors = [ResultError(description: "We're sorry, but an error occured on our side. Please try again.")]
                 }
             }
         }

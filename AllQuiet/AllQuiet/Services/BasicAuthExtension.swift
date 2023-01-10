@@ -1,10 +1,3 @@
-//
-//  BasicAuthExtension.swift
-//  AllQuiet
-//
-//  Created by MB on 04.01.23.
-//
-
 import Foundation
 
 extension URLRequest {
